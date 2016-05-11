@@ -115,7 +115,7 @@ int main(int argc, char** argv)
  			std::cout << "Beta: " << beta << std::endl;
 
 		}
-        
+        //ok
 		imgOriginal = imgOriginal + imgLines;
 		Mat outOriginal = imgOriginal;
 		flip(outOriginal, outOriginal, 1);
