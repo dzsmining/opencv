@@ -83,9 +83,10 @@ int main(int argc, char** argv)
 		//morphological closing (removes small holes from the foreground)
 		dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-		//Calculate the moments of the thresholded image
+		
         dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(10, 10)));
         
+        //Calculate the moments of the thresholded image
 		Moments oMoments = moments(imgThresholded);
 		int dM01 = oMoments.m01;
 		int dM10 = oMoments.m10;
@@ -103,7 +104,7 @@ int main(int argc, char** argv)
 			if (iLastX >= 0 && iLastY >= 0 && posX >= 0 && posY >= 0)
 			{
 				//Draw a red line from the previous point to the current point		B, G, R     Diamiter 
-					//line(imgLines, Point(posX, posY), Point(iLastX, iLastY), Scalar(0, 0, 255), 2);//  here is the line
+				//line(imgLines, Point(posX, posY), Point(iLastX, iLastY), Scalar(0, 0, 255), 2);//  here is the line
 			}
 			iLastX = posX;
 			iLastY = posY;
