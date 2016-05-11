@@ -90,14 +90,10 @@ int main(int argc, char** argv)
 		Moments oMoments = moments(imgThresholded);
 		int dM01 = oMoments.m01;
 		int dM10 = oMoments.m10;
-<<<<<<< HEAD
-		double dArea = oMoments.m00; 
-	 
-  
-=======
+		double dArea = oMoments.m00;
 		double dArea = oMoments.m00;
         
->>>>>>> master
+
 		// if the area <= 20000, I consider that the there are no object in the image and it's because of the noise, the area is not zero
 		if (dArea > 20000)
 		{
