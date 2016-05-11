@@ -89,7 +89,7 @@ int main(int argc, char** argv)
 		int dM10 = oMoments.m10;
 		double dArea = oMoments.m00;
 		
-	
+	 
 
 		// if the area <= 20000, I consider that the there are no object in the image and it's because of the noise, the area is not zero
 		if (dArea > 20000)
