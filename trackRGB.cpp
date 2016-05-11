@@ -12,11 +12,11 @@ double alpha = 2.0; /**< Simple contrast control */
 int beta = 3;  /**< Simple brightness control */
 
 int HighR = 255;
-int LowR = 0;
+int LowR = 244;
 int HighG = 255;
 int LowG = 0;
-int HighB = 255;
-int LowB = 0;
+int HighB = 112;
+int LowB = 23;
 
 double iLastX = -1;
 double iLastY = -1;
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
 		}
 		
 		Mat imgHSV = imgOriginal;
-		GaussianBlur(imgOriginal, imgOriginal, Size(0, 0), 3);
+		GaussianBlur(imgOriginal, imgOriginal, Size(0, 0), 4);
 		//cvtColor(imgOriginal, imgHSV, COLOR_BGR2HSV); //Convert the captured frame from BGR to HSV
 		Mat imgThresholded;
 		inRange(imgHSV, Scalar(LowB, LowG, LowR), Scalar(HighB, HighG, HighR), imgThresholded); //Threshold the image
@@ -83,14 +83,15 @@ int main(int argc, char** argv)
 		//morphological closing (removes small holes from the foreground)
 		dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
-		//Calculate the moments of the thresholded image
+		
+        dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(10, 10)));
+        
+        //Calculate the moments of the thresholded image
 		Moments oMoments = moments(imgThresholded);
 		int dM01 = oMoments.m01;
 		int dM10 = oMoments.m10;
 		double dArea = oMoments.m00;
-		
-	
-
+        
 		// if the area <= 20000, I consider that the there are no object in the image and it's because of the noise, the area is not zero
 		if (dArea > 20000)
 		{
@@ -103,7 +104,7 @@ int main(int argc, char** argv)
 			if (iLastX >= 0 && iLastY >= 0 && posX >= 0 && posY >= 0)
 			{
 				//Draw a red line from the previous point to the current point		B, G, R     Diamiter 
-				//	line(imgLines, Point(posX, posY), Point(iLastX, iLastY), Scalar(0, 0, 255), 2);  here is the line
+				//line(imgLines, Point(posX, posY), Point(iLastX, iLastY), Scalar(0, 0, 255), 2);//  here is the line
 			}
 			iLastX = posX;
 			iLastY = posY;
@@ -112,14 +113,12 @@ int main(int argc, char** argv)
 			std::cout << "B: " << LowB << ", " << HighB << std::endl;
 			std::cout << "G: " << LowG << ", " << HighG << std::endl;
 			std::cout << "R: " << LowR << ", " << HighR << std::endl;
- 			std::cout << "Beta: " << beta << std::endl;
-
+ 			//std::cout << "Beta: " << beta << std::endl;
 		}
-	
+        //ok
 		imgOriginal = imgOriginal + imgLines;
 		Mat outOriginal = imgOriginal;
 		flip(outOriginal, outOriginal, 1);
-
 		imshow("Control", imgThresholded); //show the thresholded image
 		imshow("Original", outOriginal); 
 		//show the original image
@@ -130,6 +129,6 @@ int main(int argc, char** argv)
 			cout << "esc key is pressed by user" << endl;
 			break;
 		}
-	}
+	} 
 	return 0;
 }
