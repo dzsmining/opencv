@@ -1,0 +1,4 @@
+/Users/Ava3/Desktop/opencv/CMakeFiles/edit_cache.dir
+/Users/Ava3/Desktop/opencv/CMakeFiles/rebuild_cache.dir
+/Users/Ava3/Desktop/opencv/CMakeFiles/track.dir
+/Users/Ava3/Desktop/opencv/CMakeFiles/trackRg.dir
