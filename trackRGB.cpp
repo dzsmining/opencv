@@ -129,6 +129,6 @@ int main(int argc, char** argv)
 			cout << "esc key is pressed by user" << endl;
 			break;
 		}
-	}
+	} 
 	return 0;
 }
