@@ -84,6 +84,7 @@ int main(int argc, char** argv)
 		dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 		erode(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(5, 5)));
 		
+		//Final dilate
         dilate(imgThresholded, imgThresholded, getStructuringElement(MORPH_ELLIPSE, Size(10, 10)));
         
         //Calculate the moments of the thresholded image
@@ -93,7 +94,7 @@ int main(int argc, char** argv)
 		double dArea = oMoments.m00;
 		double dArea = oMoments.m00;
         
-
+ 
 		// if the area <= 20000, I consider that the there are no object in the image and it's because of the noise, the area is not zero
 		if (dArea > 20000)
 		{
